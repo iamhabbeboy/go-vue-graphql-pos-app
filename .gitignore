@@ -1,0 +1,4 @@
+.idea/*
+app/.env
+web/.env
+web/node_modules
