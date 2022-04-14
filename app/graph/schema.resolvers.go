@@ -30,10 +30,8 @@ func (r *mutationResolver) CreateCategory(ctx context.Context, input model.NewCa
 		Parent: input.Parent,
 	}
 
-	db := database.Connect()
-	res := database.Save(db, category)
+	res := database.Save(category)
 
-	//r.categories = append(r.categories, category)
 	return res, nil
 }
 
@@ -43,8 +41,7 @@ func (r *queryResolver) Products(ctx context.Context) ([]*model.Product, error) 
 }
 
 func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, error) {
-	db := database.Connect()
-	rows := database.GetAll(db)
+	rows := database.GetAll()
 
 	return rows, nil
 }

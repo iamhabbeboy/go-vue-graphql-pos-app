@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"pos/database"
 	"pos/graph"
 	"pos/graph/generated"
 
@@ -18,6 +19,7 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
+	database.Connect()
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 

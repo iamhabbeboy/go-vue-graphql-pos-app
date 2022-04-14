@@ -7,28 +7,24 @@ import (
 	"strconv"
 )
 
-//
-//type DB struct {
-//	client *gorm.DB
-//}
-//
-//var (
-//	DB *gorm.DB
-//)
+var (
+	DB *gorm.DB
+)
 
 func Connect() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open("pos.db"), &gorm.Config{})
+	var err error
+	DB, err = gorm.Open(sqlite.Open("pos.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
 
-	db.AutoMigrate(&model.CategoryModel{})
+	DB.AutoMigrate(&model.CategoryModel{})
 
-	return db
+	return DB
 }
 
-func Save(db *gorm.DB, category *model.CategoryModel) *model.Category {
-	db.Create(&category)
+func Save(category *model.CategoryModel) *model.Category {
+	DB.Create(&category)
 
 	return &model.Category{
 		Name:   category.Name,
@@ -36,9 +32,9 @@ func Save(db *gorm.DB, category *model.CategoryModel) *model.Category {
 	}
 }
 
-func GetAll(db *gorm.DB) []*model.Category {
+func GetAll() []*model.Category {
 	var categories []*model.CategoryModel
-	db.Find(&categories)
+	DB.Find(&categories)
 	var data []*model.Category
 
 	for i := 0; i < len(categories); i++ {
