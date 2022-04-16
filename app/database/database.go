@@ -4,12 +4,20 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"pos/graph/model"
-	"strconv"
 )
 
 var (
 	DB *gorm.DB
 )
+
+//func (category *model.Category) BeforeCreate(tx *gorm.DB) (err error) {
+//	category.ID = uuid.New()
+//
+//	if !category.IsValid() {
+//		err = errors.New("can't save invalid data")
+//	}
+//	return
+//}
 
 func Connect() *gorm.DB {
 	var err error
@@ -21,28 +29,4 @@ func Connect() *gorm.DB {
 	DB.AutoMigrate(&model.CategoryModel{})
 
 	return DB
-}
-
-func Save(category *model.CategoryModel) *model.Category {
-	DB.Create(&category)
-
-	return &model.Category{
-		Name:   category.Name,
-		Parent: category.Parent,
-	}
-}
-
-func GetAll() []*model.Category {
-	var categories []*model.CategoryModel
-	DB.Find(&categories)
-	var data []*model.Category
-
-	for i := 0; i < len(categories); i++ {
-		data = append(data, &model.Category{
-			ID:     strconv.Itoa(int(categories[i].ID)),
-			Name:   categories[i].Name,
-			Parent: categories[i].Parent,
-		})
-	}
-	return data
 }

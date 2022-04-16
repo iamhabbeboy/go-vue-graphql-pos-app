@@ -5,24 +5,27 @@ package graph
 
 import (
 	"context"
-	"pos/database"
 	"pos/graph/generated"
 	"pos/graph/model"
+	"strconv"
 )
 
 func (r *mutationResolver) CreateProduct(ctx context.Context, input model.NewProduct) (*model.Product, error) {
-	//panic(fmt.Errorf("not implemented"))
-	product := &model.Product{
-		Name:  input.Name,
-		Price: input.Price,
-	}
-	r.products = append(r.products, product)
+	var product *model.ProductModel
 
-	return product, nil
+	product = &model.ProductModel{
+		Name:        input.Name,
+		Price:       input.Price,
+		Description: input.Description,
+		Stock:       input.Stock,
+		CategoryID:  strconv.Itoa(int(input.Category)),
+	}
+	response, _ := r.ProductRepository.Save(product)
+
+	return response, nil
 }
 
 func (r *mutationResolver) CreateCategory(ctx context.Context, input model.NewCategory) (*model.Category, error) {
-	//panic(fmt.Errorf("not implemented"))
 	var category *model.CategoryModel
 
 	category = &model.CategoryModel{
@@ -30,18 +33,18 @@ func (r *mutationResolver) CreateCategory(ctx context.Context, input model.NewCa
 		Parent: input.Parent,
 	}
 
-	res := database.Save(category)
+	rows, _ := r.CategoryRepository.Save(category)
 
-	return res, nil
+	return rows, nil
 }
 
 func (r *queryResolver) Products(ctx context.Context) ([]*model.Product, error) {
-	//panic(fmt.Errorf("not implemented"))
-	return r.products, nil
+	//return r.products, nil
+	panic("not implemented")
 }
 
 func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, error) {
-	rows := database.GetAll()
+	rows, _ := r.CategoryRepository.FindAll()
 
 	return rows, nil
 }
