@@ -18,14 +18,15 @@ type NewProduct struct {
 	Price       string  `json:"price"`
 	Description *string `json:"description"`
 	Stock       *string `json:"stock"`
-	Category    string  `json:"category"`
+	CategoryID  string  `json:"categoryId"`
 }
 
 type Product struct {
-	ID          string  `json:"id"`
-	Name        string  `json:"name"`
-	Price       string  `json:"price"`
-	Description *string `json:"description"`
-	Sku         *string `json:"sku"`
-	Stock       *string `json:"stock"`
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	Price       string    `json:"price"`
+	Description *string   `json:"description"`
+	Sku         *string   `json:"sku"`
+	Stock       *string   `json:"stock"`
+	Category    *Category `json:"Category"`
 }

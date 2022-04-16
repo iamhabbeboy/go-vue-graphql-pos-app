@@ -43,3 +43,9 @@ func (c *categoryService) Save(category *model.CategoryModel) (*model.Category, 
 		Parent: category.Parent,
 	}, nil
 }
+
+func (c *categoryService) FindById(id int) (*model.Category, error) {
+	category := &model.Category{}
+	err := database.DB.Where("id = ?", id).Find(category).Error
+	return category, err
+}

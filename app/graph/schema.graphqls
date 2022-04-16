@@ -22,6 +22,7 @@ type Product {
    description: String
    sku: String
    stock: String
+   Category: Category!
 }
 
 
@@ -30,7 +31,7 @@ input NewProduct {
   price: String!
   description: String
   stock: String
-  category: ID!
+  categoryId: ID!
 }
 
 

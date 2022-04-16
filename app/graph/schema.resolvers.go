@@ -7,7 +7,6 @@ import (
 	"context"
 	"pos/graph/generated"
 	"pos/graph/model"
-	"strconv"
 )
 
 func (r *mutationResolver) CreateProduct(ctx context.Context, input model.NewProduct) (*model.Product, error) {
@@ -18,7 +17,7 @@ func (r *mutationResolver) CreateProduct(ctx context.Context, input model.NewPro
 		Price:       input.Price,
 		Description: input.Description,
 		Stock:       input.Stock,
-		CategoryID:  strconv.Itoa(int(input.Category)),
+		//CategoryID:  strconv.ParseInt(int64(input.Category)),
 	}
 	response, _ := r.ProductRepository.Save(product)
 

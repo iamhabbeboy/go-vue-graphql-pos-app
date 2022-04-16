@@ -27,18 +27,22 @@ func (c *productService) FindAll() ([]*model.Product, error) {
 
 	var product []*model.Product
 
+	var category categoryService
+
 	for i := 0; i < len(product); i++ {
+		categoryId, _ := strconv.Atoi(products[i].Category.ID)
+		catId, _ := category.FindById(categoryId)
+
 		product = append(product, &model.Product{
 			ID:          strconv.Itoa(int(products[i].ID)),
 			Name:        products[i].Name,
 			Description: products[i].Description,
 			Stock:       products[i].Stock,
 			Price:       products[i].Price,
-			//Category:    products[i].Category,
+			Category:    catId,
 		})
 	}
-	panic("sdfdsf")
-	//return data, nil
+	return product, nil
 }
 
 func (c *productService) Save(product *model.ProductModel) (*model.Product, error) {
