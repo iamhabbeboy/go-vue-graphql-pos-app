@@ -9,6 +9,7 @@ import (
 	"pos/database"
 	"pos/graph"
 	"pos/graph/generated"
+	"pos/graph/model"
 	"pos/repository"
 )
 
@@ -19,8 +20,15 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
+	/**
+	 * Connect to Database
+	 * Register migration
+	 */
+	database.Connect(&model.CategoryModel{}, &model.ProductModel{})
 
-	database.Connect()
+	/**
+	* Instantiate Services
+	 */
 	var category repository.CategoryRepository = repository.NewCategoryService()
 	var product repository.ProductRepository = repository.NewProductService()
 

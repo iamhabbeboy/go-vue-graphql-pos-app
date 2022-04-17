@@ -7,18 +7,21 @@ import (
 	"context"
 	"pos/graph/generated"
 	"pos/graph/model"
+	"strconv"
 )
 
 func (r *mutationResolver) CreateProduct(ctx context.Context, input model.NewProduct) (*model.Product, error) {
 	var product *model.ProductModel
+	categoryId, _ := strconv.Atoi(input.CategoryID)
 
 	product = &model.ProductModel{
 		Name:        input.Name,
 		Price:       input.Price,
 		Description: input.Description,
 		Stock:       input.Stock,
-		//CategoryID:  strconv.ParseInt(int64(input.Category)),
+		CategoryID:  categoryId,
 	}
+
 	response, _ := r.ProductRepository.Save(product)
 
 	return response, nil
@@ -38,8 +41,9 @@ func (r *mutationResolver) CreateCategory(ctx context.Context, input model.NewCa
 }
 
 func (r *queryResolver) Products(ctx context.Context) ([]*model.Product, error) {
-	//return r.products, nil
-	panic("not implemented")
+	products, _ := r.ProductRepository.FindAll()
+
+	return products, nil
 }
 
 func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, error) {

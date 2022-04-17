@@ -13,8 +13,7 @@ type ProductRepository interface {
 	FindBy(product *model.ProductModel) (*model.Product, error)
 }
 
-type productService struct {
-}
+type productService struct{}
 
 func NewProductService() *productService {
 	return &productService{}
@@ -29,7 +28,7 @@ func (c *productService) FindAll() ([]*model.Product, error) {
 
 	var category categoryService
 
-	for i := 0; i < len(product); i++ {
+	for i := 0; i < len(products); i++ {
 		categoryId, _ := strconv.Atoi(products[i].Category.ID)
 		catId, _ := category.FindById(categoryId)
 

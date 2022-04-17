@@ -9,11 +9,11 @@ import (
 type CategoryRepository interface {
 	FindAll() ([]*model.Category, error)
 	Save(category *model.CategoryModel) (*model.Category, error)
+	Get(id int) (*model.Category, error)
+	FindById(id int) (*model.Category, error)
 }
 
-type categoryService struct {
-	//Db *gorm.DB
-}
+type categoryService struct{}
 
 func NewCategoryService() *categoryService {
 	return &categoryService{}
@@ -48,4 +48,8 @@ func (c *categoryService) FindById(id int) (*model.Category, error) {
 	category := &model.Category{}
 	err := database.DB.Where("id = ?", id).Find(category).Error
 	return category, err
+}
+
+func (c *categoryService) Get(id int) (*model.Category, error) {
+	panic("Not implementation")
 }
