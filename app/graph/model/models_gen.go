@@ -28,5 +28,5 @@ type Product struct {
 	Description *string   `json:"description"`
 	Sku         *string   `json:"sku"`
 	Stock       *string   `json:"stock"`
-	Category    *Category `json:"Category"`
+	Category    *Category `json:"category"`
 }

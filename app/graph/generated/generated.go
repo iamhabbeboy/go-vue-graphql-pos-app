@@ -139,7 +139,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateProduct(childComplexity, args["input"].(model.NewProduct)), true
 
-	case "Product.Category":
+	case "Product.category":
 		if e.complexity.Product.Category == nil {
 			break
 		}
@@ -290,7 +290,7 @@ type Product {
    description: String
    sku: String
    stock: String
-   Category: Category!
+   category: Category!
 }
 
 
@@ -790,7 +790,7 @@ func (ec *executionContext) _Product_stock(ctx context.Context, field graphql.Co
 	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Product_Category(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+func (ec *executionContext) _Product_category(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -2405,9 +2405,9 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 
 			out.Values[i] = innerFunc(ctx)
 
-		case "Category":
+		case "category":
 			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
-				return ec._Product_Category(ctx, field, obj)
+				return ec._Product_category(ctx, field, obj)
 			}
 
 			out.Values[i] = innerFunc(ctx)
