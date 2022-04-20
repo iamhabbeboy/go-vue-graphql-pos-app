@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"pos/database"
 	"pos/graph/model"
 	"strconv"
@@ -45,9 +46,16 @@ func (c *categoryService) Save(category *model.CategoryModel) (*model.Category, 
 }
 
 func (c *categoryService) FindById(id int) (*model.Category, error) {
-	category := &model.Category{}
-	err := database.DB.Where("id = ?", id).Find(category).Error
-	return category, err
+	category := &model.CategoryModel{}
+	fmt.Println(id)
+	err := database.DB.Where("id = ?", id).First(category).Error
+	//fmt.Println(category)
+	output := &model.Category{
+		ID:     strconv.Itoa(int(category.ID)),
+		Name:   category.Name,
+		Parent: category.Parent,
+	}
+	return output, err
 }
 
 func (c *categoryService) Get(id int) (*model.Category, error) {

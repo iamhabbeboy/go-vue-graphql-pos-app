@@ -1,6 +1,9 @@
 package model
 
+import "gorm.io/gorm"
+
 type ProductModel struct {
+	gorm.Model
 	ID          uint `gorm:"primaryKey"`
 	Name        string
 	Price       string
@@ -8,5 +11,5 @@ type ProductModel struct {
 	Sku         *string
 	Stock       *string
 	CategoryID  int
-	Category    Category
+	Category    CategoryModel `gorm:"foreignKey:CategoryID"`
 }

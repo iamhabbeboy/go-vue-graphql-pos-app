@@ -2,3 +2,4 @@
 app/.env
 web/.env
 web/node_modules
+app/pos.db

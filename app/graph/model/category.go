@@ -1,7 +1,7 @@
 package model
 
 type CategoryModel struct {
-	ID     uint `gorm:"primaryKey"`
+	ID     int `gorm:"primaryKey"`
 	Name   string
 	Parent *string
 }

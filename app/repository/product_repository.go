@@ -29,8 +29,8 @@ func (c *productService) FindAll() ([]*model.Product, error) {
 	var category categoryService
 
 	for i := 0; i < len(products); i++ {
-		categoryId, _ := strconv.Atoi(products[i].Category.ID)
-		catId, _ := category.FindById(categoryId)
+		categoryId := products[i].CategoryID
+		categoryData, _ := category.FindById(categoryId)
 
 		product = append(product, &model.Product{
 			ID:          strconv.Itoa(int(products[i].ID)),
@@ -38,7 +38,7 @@ func (c *productService) FindAll() ([]*model.Product, error) {
 			Description: products[i].Description,
 			Stock:       products[i].Stock,
 			Price:       products[i].Price,
-			Category:    catId,
+			Category:    categoryData,
 		})
 	}
 	return product, nil
@@ -59,9 +59,12 @@ func (c *productService) Save(product *model.ProductModel) (*model.Product, erro
 }
 
 func (c *productService) FindBy(product *model.ProductModel) (*model.Product, error) {
-	rows := &model.Product{}
+	rows := &model.ProductModel{}
 	err := database.DB.Where("name = ?", product.Name).First(rows).Error
-	return rows, err
+	output := &model.Product{
+		Name: rows.Name,
+	}
+	return output, err
 }
 
 func (c *productService) Get(id int) (*model.Product, error) {
