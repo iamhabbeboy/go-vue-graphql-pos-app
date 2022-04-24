@@ -21,6 +21,12 @@ type NewProduct struct {
 	CategoryID  string  `json:"categoryId"`
 }
 
+type NewSale struct {
+	Quantity    int     `json:"quantity"`
+	TotalAmount float64 `json:"total_amount"`
+	ProductID   string  `json:"productId"`
+}
+
 type Product struct {
 	ID          string    `json:"id"`
 	Name        string    `json:"name"`
@@ -29,4 +35,11 @@ type Product struct {
 	Sku         *string   `json:"sku"`
 	Stock       *string   `json:"stock"`
 	Category    *Category `json:"category"`
+}
+
+type Sale struct {
+	ID          string   `json:"id"`
+	Quantity    int      `json:"quantity"`
+	TotalAmount float64  `json:"total_amount"`
+	Product     *Product `json:"product"`
 }

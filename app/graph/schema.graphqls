@@ -6,12 +6,14 @@
 type Query {
   products: [Product!]!
   categories: [Category!]!
+  sales: [Sale!]!
 }
 
 
 type Mutation {
   createProduct(input: NewProduct!): Product!
   createCategory(input: NewCategory!): Category!
+  createSale(input: NewSale): Sale!
 }
 
 
@@ -44,4 +46,17 @@ type Category {
 input NewCategory {
   name: String!
   parent: String
+}
+
+type Sale {
+  id: ID!
+  quantity: Int!
+  total_amount: Float!
+  product: Product!
+}
+
+input NewSale {
+  quantity: Int!
+  total_amount: Float!
+  productId: ID!
 }

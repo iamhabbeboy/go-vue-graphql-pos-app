@@ -5,6 +5,7 @@ package graph
 
 import (
 	"context"
+	"fmt"
 	"pos/graph/generated"
 	"pos/graph/model"
 	"strconv"
@@ -40,6 +41,10 @@ func (r *mutationResolver) CreateCategory(ctx context.Context, input model.NewCa
 	return rows, nil
 }
 
+func (r *mutationResolver) CreateSale(ctx context.Context, input *model.NewSale) (*model.Sale, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
 func (r *queryResolver) Products(ctx context.Context) ([]*model.Product, error) {
 	products, _ := r.ProductRepository.FindAll()
 
@@ -50,6 +55,10 @@ func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, erro
 	rows, _ := r.CategoryRepository.FindAll()
 
 	return rows, nil
+}
+
+func (r *queryResolver) Sales(ctx context.Context) ([]*model.Sale, error) {
+	panic(fmt.Errorf("not implemented"))
 }
 
 // Mutation returns generated.MutationResolver implementation.

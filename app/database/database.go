@@ -18,5 +18,7 @@ func Connect(migration ...interface{}) *gorm.DB {
 
 	DB.AutoMigrate(migration...)
 
+	//repository.GetModel(migration)
+
 	return DB
 }

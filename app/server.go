@@ -24,13 +24,14 @@ func main() {
 	 * Connect to Database
 	 * Register migration
 	 */
-	database.Connect(&model.CategoryModel{}, &model.ProductModel{})
+	database.Connect(&model.CategoryModel{}, &model.ProductModel{}, &model.SaleModel{})
 
 	/**
 	* Instantiate Services
 	 */
 	var category repository.CategoryRepository = repository.NewCategoryService()
 	var product repository.ProductRepository = repository.NewProductService()
+	var sale repository.SaleRepository = repository.NewSaleService()
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{
 		CategoryRepository: category,
