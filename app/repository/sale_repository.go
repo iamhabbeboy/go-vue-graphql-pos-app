@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"pos/database"
 	"pos/graph/model"
 )
@@ -17,11 +18,10 @@ func NewSaleService() *SaleService {
 }
 
 func (c *SaleService) Save(sale *model.SaleModel) (*model.Sale, error) {
-	var s *model.SaleModel
-	database.DB.Create(&s)
+	database.DB.Create(&sale)
 
 	return &model.Sale{
-		ID: string(sale.ID),
+		TotalAmount: sale.TotalAmount,
 	}, nil
 }
 
@@ -36,7 +36,7 @@ func (c *SaleService) FindAll() ([]*model.Sale, error) {
 
 	for _, element := range sales {
 		productId, _ := product.Get(element.ProductID)
-
+		fmt.Println(element)
 		sale = append(sale, &model.Sale{
 			ID:          string(element.ID),
 			Quantity:    int(element.Quantity),
@@ -44,5 +44,6 @@ func (c *SaleService) FindAll() ([]*model.Sale, error) {
 			Product:     productId,
 		})
 	}
-	panic("Not implemented")
+
+	return sale, nil
 }

@@ -11,4 +11,5 @@ import (
 type Resolver struct {
 	CategoryRepository repository.CategoryRepository
 	ProductRepository  repository.ProductRepository
+	SaleRepository     repository.SaleRepository
 }

@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type SaleModel struct {
 	gorm.Model
-	ID          int
+	ID          int `gorm:"primaryKey"`
 	Quantity    float64
 	TotalAmount float64
 	ProductID   int
-	Product     *Product `gorm:"foreignKey:ProductID"`
+	Product     ProductModel `gorm:"foreignKey:ProductID"`
 }

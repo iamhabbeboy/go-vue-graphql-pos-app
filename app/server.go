@@ -36,6 +36,7 @@ func main() {
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{
 		CategoryRepository: category,
 		ProductRepository:  product,
+		SaleRepository:     sale,
 	}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))

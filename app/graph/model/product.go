@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type ProductModel struct {
 	gorm.Model
-	ID          uint `gorm:"primaryKey"`
+	ID          int `gorm:"primaryKey"`
 	Name        string
 	Price       string
 	Description *string

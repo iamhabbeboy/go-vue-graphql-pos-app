@@ -5,7 +5,6 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"pos/graph/generated"
 	"pos/graph/model"
 	"strconv"
@@ -42,7 +41,15 @@ func (r *mutationResolver) CreateCategory(ctx context.Context, input model.NewCa
 }
 
 func (r *mutationResolver) CreateSale(ctx context.Context, input *model.NewSale) (*model.Sale, error) {
-	panic(fmt.Errorf("not implemented"))
+	productId, _ := strconv.Atoi(string(input.ProductID))
+	newSale := &model.SaleModel{
+		Quantity:    float64(input.Quantity),
+		TotalAmount: input.TotalAmount,
+		ProductID:   productId,
+	}
+
+	sales, _ := r.SaleRepository.Save(newSale)
+	return sales, nil
 }
 
 func (r *queryResolver) Products(ctx context.Context) ([]*model.Product, error) {
@@ -58,7 +65,8 @@ func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, erro
 }
 
 func (r *queryResolver) Sales(ctx context.Context) ([]*model.Sale, error) {
-	panic(fmt.Errorf("not implemented"))
+	sale, _ := r.SaleRepository.FindAll()
+	return sale, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
