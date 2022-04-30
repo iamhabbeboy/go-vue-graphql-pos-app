@@ -29,7 +29,7 @@ export default {
     <img src="../assets/product.webp"/>
     <h4 class="text-sm text-center">{{ product.title }}</h4>
     <h6 class="font-bold text-sm" style="font-size: 12px">&#8358;{{ product.price }}</h6>
-    <button class="bg-blue-600 text-tiny font-bold text-white mt-2 rounded-md p-2 hover:bg-blue-400" @click="add(product)">Add
+    <button class="bg-blue-400 text-tiny font-bold text-white mt-2 rounded-md p-2 hover:bg-blue-400" @click="add(product)">Add
       to cart <icon :icon="['fa', 'shopping-cart']" />
     </button>
   </div>

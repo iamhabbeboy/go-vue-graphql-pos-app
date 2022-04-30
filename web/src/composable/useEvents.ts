@@ -1,7 +1,7 @@
 import {Product} from "../types/Product";
 import {createStore, useState} from "../store/store";
 
-const {setCart, removeCart} = createStore();
+const {setCart, removeCart, removeSingleCart} = createStore();
 
 export default {
     addToCart(product: Product) {
@@ -19,9 +19,8 @@ export default {
        removeCart()
     },
 
-    remove(product: Product) {
-        const {state}: any = useState();
+    remove(product: Product, state: any) {
         const findIndex = state.carts.findIndex((cart: { id: number; }) => cart.id === product.id)
-        console.log(findIndex)
+        removeSingleCart(findIndex)
     }
 }

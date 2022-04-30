@@ -7,5 +7,9 @@ export default {
     },
     removeCart: () => {
         state.carts.splice(0, state.carts.length);
+    },
+
+    removeSingleCart: (index: number) => {
+        state.carts.splice(index, 1)
     }
 }

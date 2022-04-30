@@ -40,7 +40,7 @@ const data: StateType = {
         "price": 1200,
         "quantity": 10
     }],
-    category: [{
+    categories: [{
         title: 'Smart phone',
         slug: 'smart-phone'
     }, {

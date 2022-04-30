@@ -13,9 +13,12 @@ import useEvents from "../composable/useEvents";
    },
    setup(props: any) {
      const carts = computed(() => props.cart);
+     const {state}: any = useState();
 
      const remove = (product: Product) => {
-       useEvents.remove(product)
+       if(confirm('Are you sure ?')) {
+         useEvents.remove(product, state)
+       }
      }
      
      return {
@@ -34,7 +37,7 @@ import useEvents from "../composable/useEvents";
         {{ cart.title }}
       </td>
       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-        <input type="text" :value="cart.quantity" class="border w-10 p-2"/>
+        <input type="number" :value="cart.quantity" class="border w-10 p-2 w-16"/>
       </td>
       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
         10
