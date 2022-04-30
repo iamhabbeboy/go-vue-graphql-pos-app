@@ -1,23 +1,20 @@
 <script lang="ts">
 import NavBar from "./components/NavBar.vue";
+import Product from "./components/Product.vue";
 import Checkout from "./components/Checkout.vue";
-import useEvent from "./composable/useEvents";
-import {Product} from "./types/Product";
+
 import {useState} from "./store/store";
 
 export default {
   components: {
     NavBar,
-    Checkout
+    Checkout,
+    Product
   },
   setup() {
     const {state}: any = useState();
-    const add = (product: Product) => {
-      useEvent.addToCart(product)
-    }
 
     return {
-      add,
       products: state.products,
     }
   }
@@ -37,15 +34,8 @@ export default {
     </div>
     <div class="flex justify-between mt-5">
       <div class="flex flex-wrap w-10/12">
-        <div class="border w-64 ml-2 p-4 mb-2 text-center shadow-md" v-for="(product, index) of products"
-             :key="index">
-          <img src="./assets/product.webp"/>
-          <h4 class="text-sm text-center">{{ product.title }}</h4>
-          <h6 class="font-bold text-sm" style="font-size: 12px">&#8358;{{ product.price }}</h6>
-          <button class="bg-blue-600 text-sm text-white mt-2 rounded-md p-2 hover:bg-blue-400" @click="add(product)">Add
-            to cart
-          </button>
-        </div>
+        <Product v-for="(product, index) of products"
+                 :key="index" :data="product" />
       </div>
       <Checkout />
     </div>
