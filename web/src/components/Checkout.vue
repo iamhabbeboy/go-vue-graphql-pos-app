@@ -24,7 +24,7 @@ export default {
 }
 </script>
 <template>
-  <div class="border-l w-3/12">
+  <div class="border-l w-4/12">
     <div class="font-bold bg-gray-100 p-4 flex justify-between">
       Checkout
       <button class="bg-red-700 text-white px-3 rounded-md text-sm font-bold cursor hover:bg-red-600" style="font-size: 12px"

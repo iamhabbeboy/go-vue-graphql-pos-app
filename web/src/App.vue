@@ -30,7 +30,7 @@ export default {
       <Search />
     </div>
     <div class="flex justify-between mt-5">
-      <div class="flex flex-wrap w-10/12">
+      <div class="flex flex-wrap">
         <Product v-for="(product, index) of products"
                  :key="index" :data="product" />
       </div>

@@ -4,7 +4,7 @@ import {state} from "./state"
 
 export const stateSymbol = Symbol('state');
 export const createStore = () => {
-    return { ...mutation, state: readonly(state) };
+    return { ...mutation, state: state };
 }
 export const useState = () => inject(stateSymbol);
 export const provideState = () => provide(

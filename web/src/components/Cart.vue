@@ -20,10 +20,16 @@ import useEvents from "../composable/useEvents";
          useEvents.remove(product, state)
        }
      }
-     
+
+     const setQuantity = (product: Product, event: Event) => {
+        const inputValue: any = event.target;
+        useEvents.setQty(product, inputValue.value);
+     }
+
      return {
        carts,
-       remove
+       remove,
+       setQuantity
      }
    }
  }
@@ -37,10 +43,10 @@ import useEvents from "../composable/useEvents";
         {{ cart.title }}
       </td>
       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-        <input type="number" :value="cart.quantity" class="border w-10 p-2 w-16"/>
+        <input type="number" :value="cart.quantity" class="border w-10 p-2 w-16" @keyup="setQuantity(cart, $event)" />
       </td>
       <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-        10
+        {{ cart.quantity * cart.price }}
       </td>
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-red-600">
         <button @click="remove(cart)"><icon :icon="['fa', 'times-circle']" /></button>
