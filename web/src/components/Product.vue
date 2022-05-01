@@ -2,6 +2,7 @@
 import {computed, PropType} from "vue";
 import useEvent from "../composable/useEvents";
 import {Product} from "../types/Product";
+import {createStore, useState} from "../store/store";
 
 export default {
   props: {
@@ -11,10 +12,12 @@ export default {
     }
   },
   setup(props: any) {
+    const {state}: any = useState();
     const product = computed(() => props.data);
 
     const add = (product: Product) => {
-      useEvent.addToCart(product)
+      const cart: Product = state?.carts.find((value: {id: number}) => value.id === product.id)
+      useEvent.addToCart(product, cart)
     }
 
     return {

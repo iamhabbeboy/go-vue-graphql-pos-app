@@ -6,12 +6,14 @@ const {setCart, removeCart, removeSingleCart, setQuantity} = createStore();
 export default {
     qty: 0,
 
-    addToCart(product: Product) {
+    addToCart(product: Product, cart: any) {
         if(!product) {
             return;
         }
-        this.qty += 1
-        setCart(product, this.qty)
+
+        product.quantity += cart ? product.quantity + 1 : 0
+
+        setCart(product, product.quantity)
     },
 
     clearCart(state: any) {
