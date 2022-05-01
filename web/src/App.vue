@@ -5,6 +5,7 @@ import Checkout from "./components/Checkout.vue";
 import Search from "./components/Search.vue";
 
 import {useState} from "./store/store";
+import {computed} from "vue";
 
 export default {
   components: {
@@ -15,9 +16,10 @@ export default {
   },
   setup() {
     const {state}: any = useState();
+    const products = computed(() => state.filters.length ? state.filters : state.products)
 
     return {
-      products: state.products,
+      products,
     }
   }
 }

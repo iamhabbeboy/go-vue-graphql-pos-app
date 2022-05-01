@@ -3,5 +3,6 @@ import {Product} from "./Product";
 export interface StateType {
     carts: Product[],
     products: Product[],
-    categories: any
+    categories: any,
+    filters: []
 }

@@ -27,6 +27,15 @@ export default {
         }
 
         result.quantity = value;
-        console.log(result.quantity)
+    },
+
+    getCategory: () => {
+        const category = state.products.map((value: {category: string}) => value.category)
+        const uniqueResult = [...new Set(category)]
+        state.categories = uniqueResult
+    },
+
+    setFilter: (result: any) => {
+        state.filters = result;
     }
 }

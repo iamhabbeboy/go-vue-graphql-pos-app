@@ -2,7 +2,7 @@ import {Product} from "../types/Product";
 import {createStore, useState} from "../store/store";
 import {state} from "../store/state";
 
-const {setCart, removeCart, removeSingleCart, setQuantity} = createStore();
+const {setCart, removeCart, removeSingleCart, setFilter} = createStore();
 
 export default {
     qty: 0,
@@ -28,9 +28,34 @@ export default {
         removeSingleCart(findIndex)
     },
 
-    setQty(product: Product, qty: number, state: any) {
+    setQty(product: Product, quantity: number, state: any) {
         const cart: Product = state?.carts.find((value: { id: number }) => value.id === product.id)
-        cart.quantity = qty;
+        cart.quantity = quantity;
         setCart(product, cart.quantity)
+    },
+
+    search(text: HTMLInputElement, category: string | undefined) {
+        if(text.value === '' && !category) {
+            text.focus()
+            return;
+        }
+        const response: Product | any = state.products.filter((product: Product) => {
+            if(text.value !== '' && !category) {
+                const value = text.value.toLowerCase()
+                const title = product.title.toLowerCase()
+                return title.includes(value);
+            }
+            if(text.value === '' && category) {
+                return product.category.includes(category)
+            }
+            if(text.value !== '' && category) {
+                const value = text.value.toLowerCase()
+                const title = product.title.toLowerCase()
+                return title.includes(value) && product.category.includes(category)
+            }
+            return [];
+        });
+
+        setFilter(response);
     }
 }
