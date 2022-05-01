@@ -3,5 +3,6 @@ export interface Product {
     title: string,
     price: number,
     quantity: number,
-    category: string
+    category: string,
+    sub_total: number
 }

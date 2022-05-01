@@ -2,6 +2,7 @@
 import {useState} from "../store/store";
 import useEvent from "../composable/useEvents";
 import Cart from "./Cart.vue";
+import {watchEffect, ref} from "vue";
 
 export default {
   components: {
@@ -9,6 +10,15 @@ export default {
   },
   setup() {
     const {state}: any = useState();
+    const subTotal = ref<number>(0)
+
+    watchEffect(() => {
+      if (state.carts.length) {
+        for (let value of state.carts) {
+          subTotal.value += value.sub_total
+        }
+      }
+    })
 
     const clearCart = () => {
       if(confirm('Are you sure ?')) {
@@ -18,7 +28,8 @@ export default {
 
     return {
       carts: state.carts,
-      clearCart
+      clearCart,
+      subTotal
     }
   }
 }
@@ -65,23 +76,26 @@ export default {
               <table class="min-w-full">
                 <tbody>
                 <tr class="border-t">
-                  <th>&nbsp;</th>
+                  <th colspan="2">&nbsp;</th>
+                  <th >&nbsp;</th>
                   <th colspan="2" class="">Discount</th>
                   <th>&#8358; 0.0%</th>
                 </tr>
                 <tr>
-                  <th>&nbsp;</th>
+                  <th colspan="3">&nbsp;</th>
                   <th colspan="2">Sub total</th>
-                  <th>&#8358; 90,000</th>
+                  <th>&#8358; {{subTotal}}</th>
                 </tr>
                 <tr>
-                  <th colspan="3"> &nbsp;</th>
+                  <th colspan="4"> &nbsp;</th>
                 </tr>
                 <tr>
-                  <th colspan="2">&nbsp;</th>
+                  <th>
+                    <button class="rounded-md bg-green-600 text-white p-3 shadow-md hover:bg-green-500 font-bold">Pay-in &amp; print </button>
+                  </th>
                   <th colspan="3">
                     <h4>Total</h4>
-                    <h1 class="text-xl text-right">&#8358; 95,000</h1>
+                    <h1 class="text-xl text-right">&#8358; {{subTotal}}</h1>
                   </th>
                 </tr>
                 </tbody>

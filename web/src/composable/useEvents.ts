@@ -5,14 +5,11 @@ import {state} from "../store/state";
 const {setCart, removeCart, removeSingleCart, setFilter} = createStore();
 
 export default {
-    qty: 0,
-
     addToCart(product: Product, cart: any) {
         if (!product) {
             return;
         }
         cart.quantity += 1
-
         setCart(product, cart.quantity)
     },
 
@@ -36,8 +33,7 @@ export default {
 
     search(text: HTMLInputElement, category: string | undefined) {
         if(text.value === '' && !category) {
-            text.focus()
-            return;
+            state.products = state.products
         }
         const response: Product | any = state.products.filter((product: Product) => {
             if(text.value !== '' && !category) {

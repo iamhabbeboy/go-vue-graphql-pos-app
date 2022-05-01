@@ -12,7 +12,7 @@ export default {
     }
   },
   setup(props: any) {
-    const carts = computed(() => props.cart);
+    const carts: Product | any = computed(() => props.cart);
     const {state}: any = useState();
 
     const remove = (product: Product) => {

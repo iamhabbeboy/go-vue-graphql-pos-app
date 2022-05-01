@@ -4,12 +4,13 @@ import {Product} from "../types/Product";
 
 export default {
     setCart: (cart: Product, qty: number) => {
-        const productIndex = state.carts.find((product: { id: number }) => product.id == cart.id);
+        const productIndex: Product | undefined = state.carts.find((product: { id: number }) => product.id == cart.id);
+        cart.sub_total = cart.price * cart.quantity;
         if (!productIndex) {
-            state.carts.push(cart)
-        } else {
-            productIndex.quantity = +qty
+            return state.carts.push(cart)
         }
+
+        productIndex.quantity = +qty
     },
 
     removeCart: () => {
@@ -30,7 +31,7 @@ export default {
     },
 
     getCategory: () => {
-        const category = state.products.map((value: {category: string}) => value.category)
+        const category = state.products.map((value: { category: string }) => value.category)
         const uniqueResult = [...new Set(category)]
         state.categories = uniqueResult
     },
