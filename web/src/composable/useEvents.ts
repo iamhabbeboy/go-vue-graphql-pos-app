@@ -1,5 +1,6 @@
 import {Product} from "../types/Product";
 import {createStore, useState} from "../store/store";
+import {state} from "../store/state";
 
 const {setCart, removeCart, removeSingleCart, setQuantity} = createStore();
 
@@ -7,20 +8,19 @@ export default {
     qty: 0,
 
     addToCart(product: Product, cart: any) {
-        if(!product) {
+        if (!product) {
             return;
         }
+        cart.quantity += 1
 
-        product.quantity += cart ? product.quantity + 1 : 0
-
-        setCart(product, product.quantity)
+        setCart(product, cart.quantity)
     },
 
     clearCart(state: any) {
-       if(!state.carts) {
-           return alert("Not implementation available")
-       }
-       removeCart()
+        if (!state.carts) {
+            return alert("Not implementation available")
+        }
+        removeCart()
     },
 
     remove(product: Product, state: any) {
@@ -28,7 +28,9 @@ export default {
         removeSingleCart(findIndex)
     },
 
-    setQty(product: Product, qty: number) {
-        setCart(product, qty)
+    setQty(product: Product, qty: number, state: any) {
+        const cart: Product = state?.carts.find((value: { id: number }) => value.id === product.id)
+        cart.quantity = qty;
+        setCart(product, cart.quantity)
     }
 }

@@ -16,7 +16,7 @@ export default {
     const product = computed(() => props.data);
 
     const add = (product: Product) => {
-      const cart: Product = state?.carts.find((value: {id: number}) => value.id === product.id)
+      const cart: Product | object = state?.carts.find((value: {id: number}) => value.id === product.id) || {quantity: 1}
       useEvent.addToCart(product, cart)
     }
 
