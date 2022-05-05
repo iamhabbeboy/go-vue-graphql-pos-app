@@ -2,7 +2,7 @@
 import {useState} from "../store/store";
 import useEvent from "../composable/useEvents";
 import Cart from "./Cart.vue";
-import {watchEffect, ref} from "vue";
+import {watchEffect, ref, onMounted} from "vue";
 
 export default {
   components: {
@@ -11,13 +11,10 @@ export default {
   setup() {
     const {state}: any = useState();
     const subTotal = ref<number>(0)
+    const total = ref(0);
 
     watchEffect(() => {
-      if (state.carts.length) {
-        for (let value of state.carts) {
-          subTotal.value += value.sub_total
-        }
-      }
+       subTotal.value = state.carts.reduce((cart, item:{sub_total: number}) => cart + item.sub_total, 0);
     })
 
     const clearCart = () => {

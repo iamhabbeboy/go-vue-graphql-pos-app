@@ -14,9 +14,6 @@ export default {
     },
 
     clearCart(state: any) {
-        if (!state.carts) {
-            return alert("Not implementation available")
-        }
         removeCart()
     },
 

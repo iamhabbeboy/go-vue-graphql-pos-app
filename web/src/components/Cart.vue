@@ -1,7 +1,7 @@
 <script lang="ts">
 import {computed, PropType} from "vue";
 import {Product} from "../types/Product";
-import {useState} from "../store/store";
+import {useState, createStore} from "../store/store";
 import useEvents from "../composable/useEvents";
 
 export default {
@@ -13,6 +13,7 @@ export default {
   },
   setup(props: any) {
     const carts: Product | any = computed(() => props.cart);
+    const {removeCart} = createStore();
     const {state}: any = useState();
 
     const remove = (product: Product) => {
