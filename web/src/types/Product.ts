@@ -4,5 +4,8 @@ export interface Product {
     price: number,
     quantity: number,
     category: string,
-    sub_total: number
+    sub_total: number,
+    image: string,
+    sku: string,
+    stock: number
 }

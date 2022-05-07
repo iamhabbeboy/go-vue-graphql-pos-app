@@ -20,19 +20,12 @@ export default {
             singleProduct.value = product;
         }
 
-        const addProduct = () => {
-          editProductElement.value.classList.remove('hidden')
-          fullWidthTableElement.value.classList.remove('w-full')
-          singleProduct.value = undefined;
-        }
-
         const closeEditProduct = () => {
             editProductElement.value.classList.add('hidden')
             fullWidthTableElement.value.classList.add('w-full')
         }
 
         return {
-            addProduct,
             editProduct,
             singleProduct,
             closeEditProduct,
@@ -63,12 +56,7 @@ export default {
       <div class="bg-gray-100 p-3 flex hide-print">
         <Search />
       </div>
-      <div>
-        <div class="flex justify-end">
-        <button @click="addProduct" class="bg-green-700 shadow-lg hover:bg-green-800 p-2 rounded-md text-white px-5 mt-3">Add New <icon :icon="['fas', 'check-circle']" /> </button>
-        </div>
-      </div>
-      <div class="flex">
+      <div class="mt-5 flex">
             <div class="border-b table-show w-full" style="font-size:12px;" ref="fullWidthTableElement">
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -79,26 +67,23 @@ export default {
                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
                   #
                 </th>
+                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
+                  ReferenceID
+                </th>
                  <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
-                  Image
-                </th>
-                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
-                  Category
-                </th>
-                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
-                  Title
-                </th>
-                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
-                  In stock
-                </th>
-                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
-                  Sold
+                  Product title
                 </th>
                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
                   Price
                 </th>
                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
-                  SKU
+                  Quantity
+                </th>
+                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
+                  Sub Total
+                </th>
+                <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
+                  Total
                 </th>
                 <th scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
                   <icon :icon="['fa', 'edit']" />
@@ -109,9 +94,6 @@ export default {
                 <tr class="bg-white border-b hover:bg-gray-100" v-for="(product, index) in products" :key="index" @click="editProduct(product)">
                 <td scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
                   {{ index + 1}}
-                </td>
-                 <td scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
-                      <img src="../assets/product.webp" class="w-12"/>
                 </td>
                 <td scope="col" class="text-sm text-gray-900 px-6 py-4 text-left">
                   {{ product.category }}
@@ -145,18 +127,12 @@ export default {
         <div>
             <button class="float-right text-5xl" @click="closeEditProduct">&times;</button>
         </div>
-        <h1 class="text-2xl my-3 font-bold">
-          <span v-if="singleProduct">Edit Product </span>
-          <span v-else>Add New</span>
-        </h1>
-        <hr class="pt-4"/>
         <img :src="singleProduct ? singleProduct.image : ''" class="w-32" />
         <input type="file" />
         <ul class="mt-3" style="font-size: 13px">
-            <li class="py-1">
+            <li class="py-1" v-if="singleProduct">
                 <label class="text-tiny">Category </label>
-                 <input v-show="!singleProduct" type="text" class="border rounded-md p-2 block shadow w-full" />
-                  <select class="border rounded-md p-3 w-100 shadow block w-full bg-white" ref="category" v-if="singleProduct">
+                  <select class="border rounded-md p-3 w-100 shadow block w-full bg-white" ref="category">
                     <option>select</option>
                     <option v-for="(category, index) of categories" :key="index" :value="category" 
                       :selected="singleProduct.category === category"
@@ -177,7 +153,7 @@ export default {
             </li>
             <li class="py-1">
                 <label class="text-tiny">SKU </label>
-                <input type="text" :disabled="singleProduct" :class="singleProduct ? 'cursor-not-allowed bg-gray-100' : '' + 'shadow opacity-50 border rounded-md p-2 block w-full'" :value="singleProduct ? singleProduct.sku : ''" />
+                <input type="text" disabled class="cursor-not-allowed bg-gray-100 shadow opacity-50 border rounded-md p-2 block w-full" :value="singleProduct ? singleProduct.sku : ''" />
             </li>
             <li class="flex justify-between">
                 <button class="bg-blue-400 p-2 rounded-md text-white px-5 mt-3 w-full" @click="filterProduct">Submit <icon :icon="['fas', 'check-circle']" /> </button>
