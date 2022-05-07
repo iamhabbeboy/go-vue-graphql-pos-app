@@ -155,11 +155,10 @@ export default {
         <ul class="mt-3" style="font-size: 13px">
             <li class="py-1">
                 <label class="text-tiny">Category </label>
-                 <input v-show="!singleProduct" type="text" class="border rounded-md p-2 block shadow w-full" />
-                  <select class="border rounded-md p-3 w-100 shadow block w-full bg-white" ref="category" v-if="singleProduct">
+                  <select class="border rounded-md p-3 w-100 shadow block w-full bg-white" ref="category">
                     <option>select</option>
                     <option v-for="(category, index) of categories" :key="index" :value="category" 
-                      :selected="singleProduct.category === category"
+                      :selected="singleProduct && singleProduct.category === category"
                     >{{category}}</option>
                 </select>
             </li>
