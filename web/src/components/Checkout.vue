@@ -14,8 +14,12 @@ export default {
     const total = ref(0);
 
     watchEffect(() => {
-       subTotal.value = state.carts.reduce((cart, item:{sub_total: number}) => cart + item.sub_total, 0);
+      subTotal.value = state.carts.reduce((cart, item:{sub_total: number}) => cart + item.sub_total, 0);
     })
+
+    const print = () => {
+      window.print();
+    }
 
     const clearCart = () => {
       if(confirm('Are you sure ?')) {
@@ -24,6 +28,7 @@ export default {
     }
 
     return {
+      print,
       carts: state.carts,
       clearCart,
       subTotal
@@ -33,13 +38,13 @@ export default {
 </script>
 <template>
   <div class="border-l w-4/12">
-    <div class="font-bold bg-gray-100 p-4 flex justify-between">
+    <div class="font-bold bg-gray-100 p-4 flex justify-between hide-print">
       Checkout
       <button class="bg-red-700 text-white px-3 rounded-md text-sm font-bold cursor hover:bg-red-600" style="font-size: 12px"
       @click.prevent="clearCart">
         Clear cart &times;</button>
     </div>
-    <div class="border-b" style="font-size:12px;">
+    <div class="border-b table-show" style="font-size:12px;">
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -66,7 +71,7 @@ export default {
               <tbody>
               </tbody>
             </table>
-            <div class="overflow-hidden" style="height: 400px;overflow: scroll">
+            <div class="overflow-hidden print" style="height: 400px;overflow: scroll">
               <Cart :cart="carts"/>
             </div>
             <div>
@@ -88,7 +93,7 @@ export default {
                 </tr>
                 <tr>
                   <th>
-                    <button class="rounded-md bg-green-600 text-white p-3 shadow-md hover:bg-green-500 font-bold">Pay-in &amp; print </button>
+                    <button class="rounded-md bg-green-600 text-white p-3 shadow-md hover:bg-green-500 font-bold" @click="print">Pay-in &amp; print </button>
                   </th>
                   <th colspan="3">
                     <h4>Total</h4>
@@ -104,3 +109,12 @@ export default {
     </div>
   </div>
 </template>
+
+<style>
+/* @media print {
+   .table-show {
+    background: orange !important;
+    width: 100%;
+  }
+} */
+</style>

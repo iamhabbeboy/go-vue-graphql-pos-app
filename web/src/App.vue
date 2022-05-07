@@ -1,45 +1,40 @@
-<script lang="ts">
+<script>
+import { ref, computed } from 'vue'
+import Home from './pages/Home.vue'
+import Inventory from './pages/Inventory.vue'
+import NotFound from './pages/404.vue'
 import NavBar from "./components/NavBar.vue";
-import Product from "./components/Product.vue";
-import Checkout from "./components/Checkout.vue";
-import Search from "./components/Search.vue";
-
-import {useState} from "./store/store";
-import {computed} from "vue";
 
 export default {
   components: {
     NavBar,
-    Checkout,
-    Product,
-    Search
   },
   setup() {
-    const {state}: any = useState();
-    const products = computed(() => state.filters.length ? state.filters : state.products)
+    const routes = {
+      '/': Home,
+      '/inventory': Inventory
+    }
 
+    const currentPath = ref(window.location.hash)
+
+    window.addEventListener('hashchange', () => {
+      currentPath.value = window.location.hash
+    })
+
+    const currentView = computed(() => {
+      return routes[currentPath.value.slice(1) || '/'] || NotFound
+    })
     return {
-      products,
+      currentView,
+      routes
     }
   }
 }
 </script>
 
 <template>
-  <NavBar/>
-  <section class="w-10/12 mx-auto mt-6">
-    <div class="bg-gray-100 p-3 flex">
-      <Search />
-    </div>
-    <div class="flex justify-between mt-5">
-      <div class="flex flex-wrap">
-        <Product v-for="(product, index) of products"
-                 :key="index" :data="product" />
-      </div>
-      <Checkout />
-    </div>
-    <div class="p-10 bg-gray-100 mt-20 text-tiny font-bold">
-      <a href="https://bashabls.com.ng" class="hover:underline">Designed with ❤️ by Bashlabs Innovation</a>
-    </div>
-  </section>
+  <div>
+    <NavBar />
+    <component :is="currentView" />
+  </div>
 </template>
