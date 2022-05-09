@@ -1,6 +1,7 @@
 import {state} from "./state";
 
 import {Product} from "../types/Product";
+import { Transaction } from "../types/Transaction";
 
 export default {
     setCart: (cart: Product, qty: number) => {
@@ -38,5 +39,9 @@ export default {
 
     setFilter: (result: any) => {
         state.filters = result;
-    }
+    },
+
+    // setTransaction: (transaction: Transaction) => {
+    //     state.transactions = transaction;
+    // }
 }

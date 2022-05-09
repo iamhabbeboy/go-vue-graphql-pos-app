@@ -79,9 +79,43 @@ const data: StateType = {
     transactions: [{
         "referenceId": "01921234324",
         "product": {
-            "title": "iphone 13"
+            "title": "iphone 13",
+            "price": 12000
         },
-        "price": {
+        "quantity": 100,
+        "sub_total": 2000,
+        "total": 20000
+    },{
+        "referenceId": "01921234324",
+        "product": {
+            "title": "iphone 13",
+            "price": 12000
+        },
+        "quantity": 100,
+        "sub_total": 2000,
+        "total": 20000
+    },{
+        "referenceId": "01921234324",
+        "product": {
+            "title": "iphone 13",
+            "price": 12000
+        },
+        "quantity": 100,
+        "sub_total": 2000,
+        "total": 20000
+    },{
+        "referenceId": "01921234324",
+        "product": {
+            "title": "iphone 13",
+            "price": 12000
+        },
+        "quantity": 100,
+        "sub_total": 2000,
+        "total": 20000
+    },{
+        "referenceId": "01921234324",
+        "product": {
+            "title": "iphone 13",
             "price": 12000
         },
         "quantity": 100,
