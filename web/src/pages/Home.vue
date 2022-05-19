@@ -48,9 +48,9 @@ export default {
             />
           </div>
           <div>
-            <!-- <Pagination :data="perPage" /> -->
+            <Pagination :data="data" :perPage="perPage" :backPage="backPage" :nextPage="nextPage" :gotoPage="gotoPage" :page="page" />
 
-            <div class="mt-10">
+            <!-- <div class="mt-10">
               <nav aria-label="Page navigation example">
                 <ul class="inline-flex -space-x-px">
                   <li>
@@ -81,7 +81,7 @@ export default {
                   </li>
                 </ul>
               </nav>
-            </div>
+            </div> -->
           </div>
         </div>
         <Checkout />
