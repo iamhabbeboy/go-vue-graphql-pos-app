@@ -2,19 +2,24 @@
 import Search from "../components/Search.vue";
 import { Product } from "../types/Product";
 import { createStore, useState } from "../store/store";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { StateType } from "../types/State";
 import { Transaction } from '../types/Transaction';
+import Pagination from "../components/Pagination.vue";
+import handlePagination from "../composable/usePagination";
 
 export default {
   components: {
     Search,
+    Pagination
   },
   setup() {
     const { state } = useState();
+    const transactions = computed(() => state.transactions)
     const singleTransaction = ref<Transaction>();
     const editProductElement = ref();
     const fullWidthTableElement = ref();
+    const handlePaginationValue = handlePagination(transactions.value);
 
     const editProduct = (transaction: Transaction) => {
       editProductElement.value.classList.remove("hidden");
@@ -33,6 +38,7 @@ export default {
       closeEditProduct,
       editProductElement,
       fullWidthTableElement,
+      ...handlePaginationValue,
       products: state.products,
       categories: state.categories,
       transactions: state.transactions,
@@ -125,7 +131,7 @@ export default {
                   <tbody>
                     <tr
                       class="bg-white border-b hover:bg-gray-100"
-                      v-for="(transaction, index) in transactions"
+                      v-for="(transaction, index) in paginatedData"
                       :key="index"
                       @click="editProduct(transaction)"
                     >
@@ -246,6 +252,15 @@ export default {
           </ul>
         </div>
       </div>
+
+         <Pagination
+        :data="data"
+        :perPage="perPage"
+        :backPage="backPage"
+        :nextPage="nextPage"
+        :gotoPage="gotoPage"
+        :page="page"
+      />
     </section>
   </div>
 </template>

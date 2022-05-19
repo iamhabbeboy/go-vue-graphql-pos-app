@@ -48,7 +48,14 @@ export default {
             />
           </div>
           <div>
-            <Pagination :data="data" :perPage="perPage" :backPage="backPage" :nextPage="nextPage" :gotoPage="gotoPage" :page="page" />
+            <Pagination
+              :data="data"
+              :perPage="perPage"
+              :backPage="backPage"
+              :nextPage="nextPage"
+              :gotoPage="gotoPage"
+              :page="page"
+            />
 
             <!-- <div class="mt-10">
               <nav aria-label="Page navigation example">

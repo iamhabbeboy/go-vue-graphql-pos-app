@@ -2,17 +2,22 @@
 import Search from "../components/Search.vue";
 import { Product } from "../types/Product";
 import { createStore, useState } from "../store/store";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import Pagination from "../components/Pagination.vue";
+import handlePagination from "../composable/usePagination";
 
 export default {
   components: {
     Search,
+    Pagination,
   },
   setup() {
     const { state } = useState();
+    const products = computed(() => state.products)
     const singleProduct = ref<Product>();
     const editProductElement = ref();
     const fullWidthTableElement = ref();
+    const handlePaginationValue = handlePagination(products.value);
 
     const editProduct = (product: Product) => {
       editProductElement.value.classList.remove("hidden");
@@ -38,8 +43,9 @@ export default {
       closeEditProduct,
       editProductElement,
       fullWidthTableElement,
-      products: state.products,
+      products,
       categories: state.categories,
+      ...handlePaginationValue
     };
   },
 };
@@ -145,7 +151,7 @@ export default {
                   <tbody>
                     <tr
                       class="bg-white border-b hover:bg-gray-100"
-                      v-for="(product, index) in products"
+                      v-for="(product, index) in paginatedData"
                       :key="index"
                       @click="editProduct(product)"
                     >
@@ -303,6 +309,15 @@ export default {
           </ul>
         </div>
       </div>
+
+      <Pagination
+        :data="data"
+        :perPage="perPage"
+        :backPage="backPage"
+        :nextPage="nextPage"
+        :gotoPage="gotoPage"
+        :page="page"
+      />
     </section>
   </div>
 </template>
