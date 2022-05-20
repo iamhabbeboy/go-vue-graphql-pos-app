@@ -1,24 +1,24 @@
 <template>
 <section class="bg-gray-100 p-6 text-gray-700 shadow-md">
-  <div class="w-10/12 mx-auto flex text-tiny font-bold justify-between">
+  <div class="w-10/12 mx-auto flex text-mx font-bold justify-between">
     <div>logo here</div>
     <div>
       <nav>
         <ul class="flex">
           <li class="mr-6">
-            <a href="#/">Home</a>
+            <router-link to="/sale">Sale</router-link>
           </li>
           <li class="mr-6">
-            <a href="#/inventory">Inventory</a>
+            <router-link to="/inventory">Inventory</router-link>
           </li>
           <li class="mr-6">
-            <a href="#/transaction">Transaction</a>
+             <router-link to="/transaction">Transaction</router-link>
           </li>
           <li class="mr-6">
-            <a href="#/setting">Setting</a>
+            <router-link to="/setting">Setting</router-link>
           </li>
           <li class="mr-6">
-            <a href="#">Logout</a>
+            <router-link to="/">Logout</router-link>
           </li>
         </ul>
       </nav>

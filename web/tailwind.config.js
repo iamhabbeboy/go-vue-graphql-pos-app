@@ -9,7 +9,8 @@ module.exports = {
                 'poppins': ['Montserrat', 'sans-serif']
             },
             fontSize: {
-                'tiny': '.685rem'
+                'tiny': '.685rem',
+                'mx': '.80rem'
             }
         },
     },
