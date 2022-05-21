@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-20 mx-auto w-2/12 border rounded-md p-5 shadow">
+    <div class="container mt-20 mx-auto w-3/12 border rounded-md p-5 shadow">
         <h1 class="text-2xl"><span class=" text-blue-500">{{app}}</span>POS <span style="font-size: 15px !important;font-weight:bold">Login</span></h1>
         <form @submit.prevent="processLogin">
             <div class="py-1">

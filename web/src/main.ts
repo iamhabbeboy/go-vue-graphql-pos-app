@@ -1,6 +1,8 @@
 import {createApp} from 'vue'
 import App from './App.vue'
 import "./index.css"
+import { apolloProvider } from './apolloClient';
+import VueApolloComponents from '@vue/apollo-components'
 import {createStore, stateSymbol} from './store/store';
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -36,5 +38,7 @@ const routes = [
 createApp(App)
     .component("icon", FontAwesomeIcon)
     .provide(stateSymbol, createStore())
+    .use(apolloProvider)
+    .use(VueApolloComponents)
     .use(router)
     .mount('#app')

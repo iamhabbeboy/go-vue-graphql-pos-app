@@ -33,6 +33,22 @@ export default {
 
 <template>
   <div>
+    <ApolloQuery
+      :query="
+        (gql) => gql`
+          query {
+            categories {
+              id
+              name
+              parent
+            }
+          }
+        `
+      "
+      :variables="{ name }"
+    >
+      <!-- TODO -->
+    </ApolloQuery>
     <div class="hide-print"></div>
     <section class="w-10/12 mx-auto mt-6">
       <div class="bg-gray-100 p-3 flex hide-print">
