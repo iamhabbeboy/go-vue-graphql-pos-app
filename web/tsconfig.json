@@ -14,7 +14,16 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "@types/jest"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "types": [
+    "vite-plugin-pwa/client",
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "node_modules/vite-plugin-pwa/client.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

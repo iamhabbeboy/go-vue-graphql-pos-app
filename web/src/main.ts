@@ -4,6 +4,7 @@ import "./index.css"
 import { apolloProvider } from './apolloClient';
 import VueApolloComponents from '@vue/apollo-components'
 import {createStore, stateSymbol} from './store/store';
+import { registerSW } from "virtual:pwa-register"
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faCheckCircle, faEdit, faSearch, faShoppingCart, faTimesCircle} from "@fortawesome/free-solid-svg-icons";
@@ -34,6 +35,16 @@ const routes = [
     history: createWebHashHistory(),
     routes,
   })
+
+
+const intervalMS = 60 * 60 * 1000
+const updateSW = registerSW({
+  onRegistered(r: any) {
+    r && setInterval(() => {
+      r.update()
+    }, intervalMS)
+  }
+})
 
 createApp(App)
     .component("icon", FontAwesomeIcon)
