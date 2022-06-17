@@ -2,7 +2,7 @@
 <section class="bg-gray-100 p-3 text-gray-700 shadow-md">
   <div class="w-10/12 mx-auto flex text-mx font-bold justify-between">
     <div>
-      <img src="logo.png" width="30" height="30" alt="Vite POS Logo"/>
+      <img src="../assets/logo.png" width="30" height="30" alt="Vite POS Logo"/>
     </div>
     <div>
       <nav class="py-3">
