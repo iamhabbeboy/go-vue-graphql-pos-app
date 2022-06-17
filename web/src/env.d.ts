@@ -9,3 +9,4 @@ declare module '*.vue' {
 
 declare module '@vue/apollo-components'
 declare module '@vue/apollo-composable'
+declare module 'virtual:pwa-register'

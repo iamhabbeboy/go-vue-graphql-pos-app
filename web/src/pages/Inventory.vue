@@ -12,9 +12,10 @@ export default {
     Pagination,
   },
   setup() {
-    const { state } = useState();
+    const { state }: any = useState();
     const products = computed(() => state.products)
-    const singleProduct = ref<Product>();
+    // const singleProduct = ref<Product|undefined>();
+    const singleProduct = ref();
     const editProductElement = ref();
     const fullWidthTableElement = ref();
     const handlePaginationValue = handlePagination(products.value);
@@ -295,13 +296,11 @@ export default {
             <li class="flex justify-between">
               <button
                 class="bg-blue-400 p-2 rounded-md text-white px-5 mt-3 w-full"
-                @click="filterProduct"
               >
                 Submit <icon :icon="['fas', 'check-circle']" />
               </button>
               <button
                 class="bg-red-400 p-2 rounded-md text-white px-5 mt-3 w-full"
-                @click="deleteProduct"
               >
                 Delete <icon :icon="['fa', 'times-circle']" />
               </button>
@@ -315,7 +314,6 @@ export default {
         :perPage="perPage"
         :backPage="backPage"
         :nextPage="nextPage"
-        :gotoPage="gotoPage"
         :page="page"
       />
     </section>

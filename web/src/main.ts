@@ -20,15 +20,15 @@ library.add(faCheckCircle)
 const routes = [
     { 
         path: '/', 
-        component: import( "./pages/Login.vue"), 
+        component: () => import( "./pages/Login.vue"), 
         meta: {
             hideGlobalComponent: true
         } 
     },
-    { path: '/sale', component: import( "./pages/Home.vue") },
-    { path: '/inventory', component: import( "./pages/Inventory.vue") },
-    { path: '/transaction', component: import( "./pages/Transaction.vue") },
-    { path: '/:pathMatch(.*)*', component: import( "./pages/404.vue") },
+    { path: '/sale', component: () => import( "./pages/Home.vue") },
+    { path: '/inventory', component: () => import( "./pages/Inventory.vue") },
+    { path: '/transaction', component: () => import( "./pages/Transaction.vue") },
+    { path: '/:pathMatch(.*)*', component: () => import( "./pages/404.vue") },
   ];
 
   const router = createRouter({

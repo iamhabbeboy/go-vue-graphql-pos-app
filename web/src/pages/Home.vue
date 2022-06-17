@@ -35,7 +35,7 @@ export default {
   <div>
     <ApolloQuery
       :query="
-        (gql) => gql`
+        (gql: any) => gql`
           query {
             categories {
               id
@@ -69,7 +69,6 @@ export default {
               :perPage="perPage"
               :backPage="backPage"
               :nextPage="nextPage"
-              :gotoPage="gotoPage"
               :page="page"
             />
 

@@ -15,25 +15,19 @@ export default defineConfig({
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
         name: 'Vite POS',
-        short_name: 'Short name of your app',
-        description: 'Description of your app',
-        theme_color: '#ffffff',
+        short_name: 'VitePOS',
+        description: 'Manage your point of sales',
+        theme_color: '#993300',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: './192x192.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
+            src: './192x192.png',
+            sizes: '192x192',
             type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
           }
         ]
       }

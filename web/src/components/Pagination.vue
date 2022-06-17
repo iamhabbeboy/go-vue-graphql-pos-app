@@ -11,10 +11,10 @@
           </button>
         </li>
         <li>
+          <!-- @click="() => gotoPage(item)" -->
           <button
             v-for="item in Math.ceil(data.length / perPage)"
             :key="item"
-            @click="() => goToPage(item)"
             :class="`${item == page ? 'text-white bg-blue-500 hover:bg-blue-400': 'hover:bg-blue-100 hover:text-gray-700'} py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300`"
           >
             {{ item }}
@@ -60,7 +60,7 @@ export default {
       backPage: props.backPage,
       perPage: props.perPage,
       data: props.data,
-      gotoPage: props.gotoPage,
+      // gotoPage: props.gotoPage,
       nextPage: props.nextPage
     };
   },

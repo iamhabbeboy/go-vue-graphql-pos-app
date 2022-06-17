@@ -39,7 +39,8 @@ export default {
 
         return {
             app,
-            form
+            form,
+            processLogin
         }
     }
 }

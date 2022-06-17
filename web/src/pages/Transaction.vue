@@ -14,7 +14,7 @@ export default {
     Pagination
   },
   setup() {
-    const { state } = useState();
+    const { state }: any = useState();
     const transactions = computed(() => state.transactions)
     const singleTransaction = ref<Transaction>();
     const editProductElement = ref();
@@ -258,7 +258,6 @@ export default {
         :perPage="perPage"
         :backPage="backPage"
         :nextPage="nextPage"
-        :gotoPage="gotoPage"
         :page="page"
       />
     </section>

@@ -14,7 +14,7 @@ export default {
     const total = ref(0);
 
     watchEffect(() => {
-      subTotal.value = state.carts.reduce((cart, item:{sub_total: number}) => cart + item.sub_total, 0);
+      subTotal.value = state.carts.reduce((cart: any, item:{sub_total: number}) => cart + item.sub_total, 0);
     })
 
     const print = () => {
