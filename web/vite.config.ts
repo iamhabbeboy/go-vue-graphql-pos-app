@@ -17,7 +17,7 @@ export default defineConfig({
         name: 'Vite POS',
         short_name: 'VitePOS',
         description: 'Manage your point of sales',
-        theme_color: '#993300',
+        theme_color: '#0096FF',
         icons: [
           {
             src: './192x192.png',
