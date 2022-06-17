@@ -1,9 +1,11 @@
 <template>
-<section class="bg-gray-100 p-6 text-gray-700 shadow-md">
+<section class="bg-gray-100 p-3 text-gray-700 shadow-md">
   <div class="w-10/12 mx-auto flex text-mx font-bold justify-between">
-    <div>logo here</div>
     <div>
-      <nav>
+      <img src="/logo.png" width="30" height="30" alt="Vite POS Logo"/>
+    </div>
+    <div>
+      <nav class="py-3">
         <ul class="flex">
           <li class="mr-6">
             <router-link to="/sale">Sale</router-link>
